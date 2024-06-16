@@ -20,7 +20,7 @@ export default {
         "password": process.env.DB_MAIN_PASSWORD ?? 'root',
         "orm_driver": process.env.DB_ORM_DRIVER ?? 'sequelize',
         "path": [
-            path.join(__dirname, "../model/entity/User"),
+            path.join(__dirname, "../model/entity/public"),
         ],
         "enable": true,
         }

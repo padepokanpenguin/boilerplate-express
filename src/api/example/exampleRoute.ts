@@ -5,7 +5,7 @@ const app = express.Router()
 
 class ExampleRoutes {
     public routes = (): express.Router => {
-        app.get('/v1/get-users', exampleController.UserController)
+        app.get('/get-users', exampleController.UserController)
         return app
     }
 }

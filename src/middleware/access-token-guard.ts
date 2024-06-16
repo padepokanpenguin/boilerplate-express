@@ -4,10 +4,12 @@ import { BaseResponse } from "../abstractions/base-response";
 /**
  * Register all unguarded resources here
  */
-const unguardedResources: Array<string> = [];
+const unguardedResources: Array<string> = [
+  "/api/get-users"
+];
 
 export default async (request: Request, response: Response, next: NextFunction) => {
-  if(unguardedResources.includes(request.baseUrl + request.path)){
+  if(unguardedResources.includes(request.baseUrl  +  request.path)){
     /**
      * If the uri is registered in exception,
      * proceed to the resource.

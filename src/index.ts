@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
-import middleware from './middleware';
 require('dotenv').config();
+import middleware from './middleware';
 import config from './config/config';
 import { BaseResponse } from './abstractions/base-response';
 import ApiError from './abstractions/api-error';
@@ -12,12 +12,11 @@ import routes from './routes';
 
 const server = express;
 const app = server();
-const router = server.Router();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/api", (req: Request, res: Response) => {
+app.get("/api", (request: Request, response: Response) => {
     const date = new Date();
 
     const data = {
@@ -26,12 +25,12 @@ app.get("/api", (req: Request, res: Response) => {
         "time": date.toLocaleString()
     }
 
-    return BaseResponse.ok(data, "This service is running", res)
+    return BaseResponse.ok(data, "This service is running", response)
 })
 
 middleware.forEach(e => app.use(e))
+app.use('/api', routes);
 
-router.use('/api', routes);
 
 app.use((error: ApiError, request: Request, response: Response, next: NextFunction) => {
     if (error) {
